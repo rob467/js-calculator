@@ -34,15 +34,19 @@ function getNumber(e) {
     } else {
         display.textContent += buttonText;
         num2 += buttonText;
+        console.log(num2);
     }
 }
 
 symbolBtns.forEach(
     button => button.addEventListener("click", () => {
+        if (num2) {
+            onEqlBtnClick();
+        }
         const operatorSpan = document.createElement("span");
         operatorSpan.textContent = ` ${button.textContent} `;
         display.appendChild(operatorSpan);
-        operator = operatorSpan.textContent;
+        operator = operatorSpan.innerText.trim();
     }
 ))
 
@@ -74,7 +78,7 @@ function operate(num1, num2, operator) {
         case "-":
             result = subtract(num1, num2);
             break;
-        case "*":
+        case "x":
             result = multiply(num1, num2);
             break;
         case "÷":
@@ -84,9 +88,17 @@ function operate(num1, num2, operator) {
     return result;
 }
 
-equalBtn.addEventListener("click", () => {
-    if (!num2) {
+const onEqlBtnClick = function() {
+    if (num2 === undefined) {
         return;
     }
-    console.log(operate(parseInt(num1), parseInt(num2), operator));
-})
+    num1 = parseFloat(num1)
+    num2 = parseFloat(num2)
+    num1 = operate(num1, num2, operator);
+    display.textContent = Math.round(num1 * 100000) / 100000;
+    num2 = "";
+    operator = "";
+}
+
+equalBtn.addEventListener("click", onEqlBtnClick)
+
