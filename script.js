@@ -1,9 +1,11 @@
 const display = document.querySelector(".display");
 const clearBtn = document.querySelector(".clear-btn");
 const numBtns = document.querySelectorAll(".num-btn");
-const symbolBtns = document.querySelectorAll(".symbol-btn");
+const operateBtns = document.querySelectorAll(".operate-btn");
 const equalBtn = document.querySelector(".equal-btn");
-const decimalBtn = document. querySelector(".decimal-btn")
+const decimalBtn = document.querySelector(".decimal-btn")
+const squareBtn = document.querySelector(".square-btn")
+const sqrtBtn = document.querySelector(".sqrt-btn")
 
 const operationObject = {}
 
@@ -56,17 +58,51 @@ function onDecimalClick(e){
 
 decimalBtn.addEventListener("click", (e) => onDecimalClick(e))
 
-symbolBtns.forEach(
+let currentOperatorSpan = null;
+
+operateBtns.forEach(
     button => button.addEventListener("click", () => {
         if (num2) {
             onEqlBtnClick();
         }
+        if (currentOperatorSpan && display.contains(currentOperatorSpan)) {
+            display.removeChild(currentOperatorSpan)
+        }
         const operatorSpan = document.createElement("span");
-        operatorSpan.textContent = ` ${button.textContent} `;
+        operatorSpan.textContent = `${button.textContent}`;
         display.appendChild(operatorSpan);
         operator = operatorSpan.innerText.trim();
+
+        currentOperatorSpan = operatorSpan;
     }
 ))
+
+const onEqlBtnClick = function() {
+    if (num2 === undefined || num2 === "") {
+        display.textContent = num1;
+        return;
+    }
+    num1 = parseFloat(num1)
+    num2 = parseFloat(num2)
+    num1 = operate(num1, num2, operator);
+    display.textContent = Math.round(num1 * 100000) / 100000;
+    num2 = "";
+    operator = "";
+}
+
+equalBtn.addEventListener("click", onEqlBtnClick)
+
+squareBtn.addEventListener("click", () => {
+    if (!num1) return;
+    num1 = square(num1)
+    display.textContent = Math.round(num1 * 100000) / 100000;
+})
+
+sqrtBtn.addEventListener("click", () => {
+    if (!num1) return;
+    num1 = sqrt(num1);
+    display.textContent = Math.round(num1 * 100000) / 100000;
+})
 
 function add(num1, num2) {
     return num1 + num2;
@@ -87,6 +123,14 @@ function divide(num1, num2) {
     return num1 / num2;
 }
 
+function square(num1) {
+    return num1 ** 2
+}
+
+function sqrt(num1) {
+    return num1 ** 0.5
+}
+
 function operate(num1, num2, operator) {
     let result
     switch (operator) {
@@ -105,20 +149,3 @@ function operate(num1, num2, operator) {
     }
     return result;
 }
-
-const onEqlBtnClick = function() {
-    if (num2 === undefined || num2 === "") {
-        display.textContent = num1;
-        return;
-    }
-    num1 = parseFloat(num1)
-    num2 = parseFloat(num2)
-    num1 = operate(num1, num2, operator);
-    console.log(num1, num2)
-    display.textContent = Math.round(num1 * 100000) / 100000;
-    num2 = "";
-    operator = "";
-}
-
-equalBtn.addEventListener("click", onEqlBtnClick)
-

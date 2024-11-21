@@ -9,33 +9,36 @@
 <body>
     <div class="container">
         <div class="display"></div>
-        <div id="first-row" class="button-row">
-            <button class="clear-btn">Clear</button>
-            <button id="division-btn" class="symbol-btn">÷</button>
-        </div>
-        <div id="second-row" class="button-row">
-            <button id="seven-btn" class="num-btn">7</button>
-            <button id="eight-btn" class="num-btn">8</button>
-            <button id="nine-btn" class="num-btn">9</button>
-            <button id="mult-btn" class="symbol-btn">x</button>
-        </div>
-        <div id="third-row" class="button-row">
-            <button id="four-btn" class="num-btn">4</button>
-            <button id="five-btn" class="num-btn">5</button>
-            <button id="six-btn" class="num-btn">6</button>
-            <button id="sub-btn" class="symbol-btn">-</button>
-        </div>
-        <div id="fourth-row" class="button-row">
-            <button id="one-btn" class="num-btn">1</button>
-            <button id="two-btn" class="num-btn">2</button>
-            <button id="three-btn" class="num-btn">3</button>
-            <button id="add-btn" class="symbol-btn">+</button>
-        </div>
-        <div id="five-row" class="button-row">
-            <button id="blank-btn" class="blank-btn"> </button>
-            <button id="zero-btn" class="num-btn">0</button>
-            <button id="decimal-btn" class="decimal-btn">.</button>
-            <button id="eql-btn" class="equal-btn">=</button>
+        <div class="calc-btns">
+            <div id="first-row" class="button-row">
+                <button class="non-num-btn clear-btn">Clear</button>
+                <button id="division-btn" class="non-num-btn operate-btn">÷</button>
+                <button id="division-btn" class="non-num-btn square-btn">x<sup>2</sup></button>
+            </div>
+            <div id="second-row" class="button-row">
+                <button id="seven-btn" class="num-btn">7</button>
+                <button id="eight-btn" class="num-btn">8</button>
+                <button id="nine-btn" class="num-btn">9</button>
+                <button id="mult-btn" class="non-num-btn operate-btn">x</button>
+            </div>
+            <div id="third-row" class="button-row">
+                <button id="four-btn" class="num-btn">4</button>
+                <button id="five-btn" class="num-btn">5</button>
+                <button id="six-btn" class="num-btn">6</button>
+                <button id="sub-btn" class="non-num-btn operate-btn">-</button>
+            </div>
+            <div id="fourth-row" class="button-row">
+                <button id="one-btn" class="num-btn">1</button>
+                <button id="two-btn" class="num-btn">2</button>
+                <button id="three-btn" class="num-btn">3</button>
+                <button id="add-btn" class="non-num-btn operate-btn">+</button>
+            </div>
+            <div id="five-row" class="button-row">
+                <button id="blank-btn" class="non-num-btn sqrt-btn">&#x221A;</button>
+                <button id="zero-btn" class="num-btn">0</button>
+                <button id="decimal-btn" class="decimal-btn">.</button>
+                <button id="eql-btn" class="non-num-btn equal-btn">=</button>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
