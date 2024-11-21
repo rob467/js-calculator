@@ -3,6 +3,7 @@ const clearBtn = document.querySelector(".clear-btn");
 const numBtns = document.querySelectorAll(".num-btn");
 const symbolBtns = document.querySelectorAll(".symbol-btn");
 const equalBtn = document.querySelector(".equal-btn");
+const decimalBtn = document. querySelector(".decimal-btn")
 
 const operationObject = {}
 
@@ -34,9 +35,26 @@ function getNumber(e) {
     } else {
         display.textContent += buttonText;
         num2 += buttonText;
-        console.log(num2);
     }
 }
+
+function onDecimalClick(e){
+    const buttonText = e.target.innerText;
+    if (!operator && !num1) {
+        num1 = buttonText;
+        display.textContent = `0${num1}`;
+    } else if (!operator && !num1.includes(".")) {
+        display.textContent += buttonText;
+        num1 += buttonText;
+    } else if (operator && !num2) {
+        num2 = buttonText;
+        display.textContent += `0${num2}`;
+    } else if (operator && !num2.includes(".")) {
+        display.textContent += buttonText;
+        num2 += buttonText;
+}}
+
+decimalBtn.addEventListener("click", (e) => onDecimalClick(e))
 
 symbolBtns.forEach(
     button => button.addEventListener("click", () => {
@@ -89,12 +107,14 @@ function operate(num1, num2, operator) {
 }
 
 const onEqlBtnClick = function() {
-    if (num2 === undefined) {
+    if (num2 === undefined || num2 === "") {
+        display.textContent = num1;
         return;
     }
     num1 = parseFloat(num1)
     num2 = parseFloat(num2)
     num1 = operate(num1, num2, operator);
+    console.log(num1, num2)
     display.textContent = Math.round(num1 * 100000) / 100000;
     num2 = "";
     operator = "";
